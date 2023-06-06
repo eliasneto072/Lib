@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'js' %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+{% endblock 'js' %}
+
+{% block 'create-button' %}New+{% endblock 'create-button' %}
+
+{% block 'main' %}
+
+<div id="livroCarousel" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        {% for livro in livros %}
+        <li data-target="#livroCarousel" data-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active"{% endif %}></li>
+        {% endfor %}
+    </ol>
+    
+    <div class="carousel-inner">
+        {% for livro in livros %}
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+            <div class="table-responsive m-4">
+                <table class="table table-sm text-center" border="0.5">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th><h3>Livro : {{ livro.titulo }}</h3></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <img class="capa mb-4 mt-4" src="{{ livro.capa.url }}" alt="{{ livro.titulo }}" style="width: 180px; height: 280px;">
+                                <h4>Autor : {{ livro.autor }}</h4>
+                                
+                                {% if livro.co_autor %}
+                                    <h5>{{livro.co_autor}}</h5>
+                                {% else %}
+                                    <h5 style="display: none;">{{livro.co_autor}}</h5>
+                                {% endif %}
+
+                                <div class="d-flex align-items-center" style="justify-content: center;">
+                                    <h5>Emprestado : </h5>
+                                    {% if livro.emprestado %}
+                                        <input type="text" class="form-control text-center" value="&#x2714;" disabled style="opacity: 1; width: 50px; height: 50px; background-color: blue; transform: scale(0.6); border-radius: 50%; margin-bottom: 5px;">
+                                        <h5>Data : {{ livro.data_emprestimo }}</h5>
+                                    {% else %}
+                                        <input type="text" class="form-control text-center" value="&#x2716;" disabled style="opacity: 1; width: 50px; height: 50px; background-color: red; transform: scale(0.6); border-radius: 50%; margin-bottom: 5px;">
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <a class="carousel-control-prev" href="#livroCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only" style="color: black;">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#livroCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only" style="color: black;">Next</span>
+    </a>
+</div>
+
+
+{% endblock 'main' %}
+
+{% block 'body' %}
+    <script type="text/javascript" src="{% static 'js/vanilla-tilt.js' %}"></script>
+    <script>
+        VanillaTilt.init(document.querySelectorAll('.capa'), {
+            max: 35,
+            speed: 400,
+            glare: true,
+            'max-glare': 0.5,
+        });
+    </script>
+{% endblock 'body' %}

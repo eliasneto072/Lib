@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'main' %}
+<br>
+<br>
+<br>
+<br>
+<div class="d-flex justify-content-center align-items-center">
+    <form action="{% url 'create' %}" method="POST" enctype="multipart/form-data" class="d-flex flex-column flex-nowrap justify-content-center align-items-center">
+        {% csrf_token %}
+        <div class="table-responsive">
+            <table class="table">
+                {{ forms.as_table }}
+            </table>
+        </div>
+        <div class="mt-3">
+            <input class="btn btn-success btn-sm" type="submit" value="Adicionar livro">
+        </div>
+    </form>        
+</div>
+<br>
+<br>
+<br>
+<br>
+{% endblock 'main' %}
