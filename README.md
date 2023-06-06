@@ -1,6 +1,3 @@
-# Lib
-Sistema de Biblioteca Online em Django:  O projeto consiste em um sistema de biblioteca online desenvolvido usando o framework Django. O objetivo principal é fornecer uma plataforma para os usuários, onde eles possam cadastrar livros, verificar se os livros estão emprestados e realizar login para acessar
-
 Recursos Principais:
 
 1-Autenticação de Usuários: O sistema permite que os usuários se cadastrem, façam login e gerenciem suas contas. Cada usuário tem um perfil individual que contém suas informações pessoais e histórico de empréstimos.
